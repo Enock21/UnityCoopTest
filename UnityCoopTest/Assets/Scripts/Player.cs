@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
 
+    [SerializeField]
+    private float speedMove;
+
     public void Start()
     {
         //Assim que o game inicia, uma caixa de colisão é criada
@@ -36,6 +39,6 @@ public class Player : MonoBehaviour
         }
 
         //Movendo o personagem
-        transform.Translate(moveDelta * Time.deltaTime);
+        transform.Translate(moveDelta * Time.deltaTime * speedMove);
     }
 }
