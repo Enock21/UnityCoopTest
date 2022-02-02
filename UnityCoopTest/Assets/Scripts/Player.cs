@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
 
+    //A linha abaixo permite que o atributo privado speedMove possa se tornar visível na interface gráfica da Unity
     [SerializeField]
     private float speedMove;
 
