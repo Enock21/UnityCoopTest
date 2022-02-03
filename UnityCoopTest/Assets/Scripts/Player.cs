@@ -5,12 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
+
     private Vector3 moveDelta;
+
+    //Útil para chamar a caixa de colisão quando não quisermos que um personagem atravesse um objeto
     private RaycastHit2D hit;
 
-    //A linha abaixo permite que o atributo privado speedMove possa se tornar visível na interface gráfica da Unity
+    //Velocidade do player, usada no calculo de movimento. [SerializeField] permite que o atributo privado speedMove possa se tornar visível na interface gráfica da Unity
     [SerializeField]
-    //Velocidade do player, usada no calculo de movimento
     private float speedMove;
 
     public void Start()
@@ -23,8 +25,11 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         mover();
+
+        colisao();
     }
 
+    //Função que implementa o movimento do personagem principal
     public void mover()
     {
         //A função retorna -1, 0 ou 1, dependendo se o personagem se move, respectivamente, para a esquerda, para lugar nenhum ou para a direita
@@ -45,8 +50,30 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(-1,1,1);
         }
+    }
 
-        //Movendo o personagem
-        transform.Translate(moveDelta * Time.deltaTime * speedMove);
+    //Função que implementa o sistema de colisão. Impedirá o personagem de se mover quando este entrar em contato com uma caixa de colisão que se encontra em ao menos uma das layers especificadas.
+    public void colisao()
+    {
+        
+        //Invoca a caixa de colisão do player a cada frame. Indicará se houve ou não colisão no eixo y. Se a caixa retornar null, o personagem pode se mover na direção apontada. Caso contrário, não.
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0,moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Object"));
+
+        //Faz o sprite se mover (apenas no eixo y). Time.deltaTime serve para atualizar a posição no eixo com base no tempo que se passou desde o último frame até o atual. Lembrar que este tempo varia.
+        if(hit.collider == null)
+        {
+            transform.Translate(0, moveDelta.y * Time.deltaTime * speedMove, 0);
+        }
+
+
+        //Invoca a caixa de colisão do player a cada frame. Indicará se houve ou não colisão no eixo x. Se a caixa retornar null, o personagem pode se mover na direção apontada. Caso contrário, não.
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Object"));
+
+        //Faz o sprite se mover (apenas no eixo x). Time.deltaTime serve para atualizar a posição no eixo com base no tempo que se passou desde o último frame até o atual. Lembrar que este tempo varia.
+        if(hit.collider == null)
+        {
+            transform.Translate(moveDelta.x * Time.deltaTime * speedMove, 0, 0);
+        }
+        
     }
 }
