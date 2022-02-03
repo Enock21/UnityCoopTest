@@ -55,9 +55,10 @@ public class Player : MonoBehaviour
     //Função que implementa o sistema de colisão. Impedirá o personagem de se mover quando este entrar em contato com uma caixa de colisão que se encontra em ao menos uma das layers especificadas.
     public void colisao()
     {
-        
+        //ATENÇÃO! Lembrar de desabilitar a opção "Querries Start in Colliders" em Edit > Project Settings > Physics2D. Caso esteja habilitado o player irá colidir consigo próprio, e portanto não irá se mover
+
         //Invoca a caixa de colisão do player a cada frame. Indicará se houve ou não colisão no eixo y. Se a caixa retornar null, o personagem pode se mover na direção apontada. Caso contrário, não.
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0,moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Object"));
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0,moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Blocking"));
 
         //Faz o sprite se mover (apenas no eixo y). Time.deltaTime serve para atualizar a posição no eixo com base no tempo que se passou desde o último frame até o atual. Lembrar que este tempo varia.
         if(hit.collider == null)
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
 
 
         //Invoca a caixa de colisão do player a cada frame. Indicará se houve ou não colisão no eixo x. Se a caixa retornar null, o personagem pode se mover na direção apontada. Caso contrário, não.
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Object"));
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime * speedMove), LayerMask.GetMask("Actor", "Blocking"));
 
         //Faz o sprite se mover (apenas no eixo x). Time.deltaTime serve para atualizar a posição no eixo com base no tempo que se passou desde o último frame até o atual. Lembrar que este tempo varia.
         if(hit.collider == null)
