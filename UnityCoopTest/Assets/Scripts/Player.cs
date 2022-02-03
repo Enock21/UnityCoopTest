@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
+    private RaycastHit2D hit;
 
     //A linha abaixo permite que o atributo privado speedMove possa se tornar visível na interface gráfica da Unity
     [SerializeField]
+    //Velocidade do player, usada no calculo de movimento
     private float speedMove;
 
     public void Start()
@@ -19,6 +21,11 @@ public class Player : MonoBehaviour
 
     //FixedUpdate() funciona bem com o uso de physics
     public void FixedUpdate()
+    {
+        mover();
+    }
+
+    public void mover()
     {
         //A função retorna -1, 0 ou 1, dependendo se o personagem se move, respectivamente, para a esquerda, para lugar nenhum ou para a direita
         float x = Input.GetAxisRaw("Horizontal");
