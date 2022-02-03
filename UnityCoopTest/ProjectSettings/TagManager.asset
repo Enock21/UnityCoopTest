@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - Actor
-  - Object
+  - Blocking
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2445005511
     locked: 0
   - name: Actor
     uniqueID: 543066383
