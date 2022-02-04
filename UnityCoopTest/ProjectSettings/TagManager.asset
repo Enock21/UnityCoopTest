@@ -41,12 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 2445005511
+  - name: Floor
+    uniqueID: 447839071
+    locked: 0
+  - name: BG
+    uniqueID: 691943081
     locked: 0
   - name: Actor
     uniqueID: 543066383
     locked: 0
-  - name: BG
-    uniqueID: 691943081
+  - name: Player
+    uniqueID: 2445005511
     locked: 0
