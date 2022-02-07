@@ -24,13 +24,12 @@ public class Player : MonoBehaviour
     //FixedUpdate() funciona bem com o uso de physics
     public void FixedUpdate()
     {
-        mover();
-
-        colisao();
+        Mover();
+        Colisao();
     }
 
     //Função que implementa o movimento do personagem principal
-    public void mover()
+    public void Mover()
     {
         //A função retorna -1, 0 ou 1, dependendo se o personagem se move, respectivamente, para a esquerda, para lugar nenhum ou para a direita
         float x = Input.GetAxisRaw("Horizontal");
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour
     }
 
     //Função que implementa o sistema de colisão. Impedirá o personagem de se mover quando este entrar em contato com uma caixa de colisão que se encontra em ao menos uma das layers especificadas.
-    public void colisao()
+    public void Colisao()
     {
         //ATENÇÃO! Lembrar de desabilitar a opção "Querries Start in Colliders" em Edit > Project Settings > Physics2D. Caso esteja habilitado o player irá colidir consigo próprio, e portanto não irá se mover
 
@@ -77,4 +76,5 @@ public class Player : MonoBehaviour
         }
         
     }
+
 }
