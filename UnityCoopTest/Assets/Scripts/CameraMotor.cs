@@ -76,8 +76,10 @@ public class CameraMotor : MonoBehaviour
                 delta.y = deltaY + boundY;
             }
         }
-
+        
         //Adiciona os valores de x e de y ao vetor de posição da câmera. Caso o player não tenha se movido além dos limites, o valor somado será 0 para ambos os eixos
         transform.position += new Vector3(delta.x, delta.y, 0);
+        Vector3 posi = transform.position;
+        transform.position = new Vector3((float)(Mathf.Round(posi.x * 10) * 0.1), (float)(Mathf.Round(posi.y * 10) * 0.1), -10);
     }
 }
