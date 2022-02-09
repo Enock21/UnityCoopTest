@@ -53784,11 +53784,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4333611998718330466, guid: 1d542c5c9a5e1d942a51934553d1eb5d, type: 3}
       propertyPath: m_ChunkCullingBounds.x
-      value: 0.320459
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4333611998718330466, guid: 1d542c5c9a5e1d942a51934553d1eb5d, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0.3204574
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4817304800955310663, guid: 1d542c5c9a5e1d942a51934553d1eb5d, type: 3}
       propertyPath: m_RootOrder
@@ -55293,7 +55293,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009227455, y: -0.07527995}
+  m_Offset: {x: 0, y: -0.08}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -55304,7 +55304,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.5}
+  m_Size: {x: 0.9, y: 1.4}
   m_EdgeRadius: 0
 --- !u!50 &1511909414
 Rigidbody2D:
