@@ -5,11 +5,12 @@ using UnityEngine;
 public static class scr_PlayerCollider
 {
 
-    private static List<GameObject> colliders = new List<GameObject>();
+    //Lista de gameobjects que o player entrou no collider trigger. 
+    private static List<scr_KeyboardInteractable> colliders = new List<scr_KeyboardInteractable>();
 
 
     //Se o objeto não existe dentro da lista de colliders, então ele é adicionado
-    public static void AddCollider(GameObject obj)
+    public static void AddCollider(scr_KeyboardInteractable obj)
     {
 
         if (!Contains(obj.GetInstanceID()))
@@ -18,7 +19,7 @@ public static class scr_PlayerCollider
     }
 
     //InstanceID é como um hashcode. Cada instance tem um ID unico
-    public static void RemoveColllider(GameObject obj)
+    public static void RemoveColllider(scr_KeyboardInteractable obj)
     {
         bool found = false;
         int i = 0;
@@ -34,12 +35,13 @@ public static class scr_PlayerCollider
         }
     }
 
+    //Conta quantos elementos existem dentro da lista
     public static int Count()
     {
         return colliders.Count;
     }
 
-
+    //Verifica se existe algum elemento com a instanceId passada como parametro. Se sim, retorna true, caso contrário, retorna falso
     private static bool Contains(int InstanceID)
     {
         bool retorno = false;

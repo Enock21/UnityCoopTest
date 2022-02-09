@@ -88,22 +88,29 @@ public class Player : MonoBehaviour
         
     }*/
 
-
+    //Quando o jogador entra em um collider setado como trigger, é chamado essa função com o collider do objeto adentrado passado como parametro
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Confirma a tag do objeto do collider. 
         if(collision.tag == "Keyboard_Collider")
         {
-            scr_PlayerCollider.AddCollider(collision.transform.parent.gameObject);
+            //Adiciona o scrKeyboardInteractable do parent do objeto do collider para a lista de colliders em que o player invadiu.
+            //Após isso, é printado o nome do parent, e a quantidade de triggers que o player entrou
+            scr_PlayerCollider.AddCollider(collision.transform.parent.GetComponent<scr_KeyboardInteractable>());
             print("O jogador entrou no collider: " + collision.name + "::" + collision.transform.parent.name);
             print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
         }
     }
 
+    //Quando o jogador sai de um collider setado como trigger, é chamado essa função com o collider do objeto em que o player estava dentro passado como parametro
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "Keyboard_Collider")
+        //Confirma a tag do objeto do collider. 
+        if (collision.tag == "Keyboard_Collider")
         {
-            scr_PlayerCollider.RemoveColllider(collision.transform.parent.gameObject);
+            //Remove o scrKeyboardInteractable do parent do objeto do collider da lista de colliders em que o player entrou.
+            //Após isso, é printado o nome do parent, e a quantidade de triggers que o player entrou
+            scr_PlayerCollider.RemoveColllider(collision.transform.parent.GetComponent<scr_KeyboardInteractable>());
             print("O jogador saiu do collider: " + collision.name + "::" + collision.transform.parent.name);
             print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
         }
