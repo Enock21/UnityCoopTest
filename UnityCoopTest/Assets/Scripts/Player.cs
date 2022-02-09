@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
+    private Rigidbody2D rigidbody;
 
     private Vector3 moveDelta;
 
@@ -19,13 +20,16 @@ public class Player : MonoBehaviour
     {
         //Assim que o game inicia, uma caixa de colisão é criada
         boxCollider = GetComponent<BoxCollider2D>();
+        //Assim que o game inicia, o Unity associa o rigidbody com o componente RigidBody2D no Editor do mesmo objeto 
+        //onde esse script estará anexado
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     //FixedUpdate() funciona bem com o uso de physics
     public void FixedUpdate()
     {
         Mover();
-        Colisao();
+        //Colisao();
     }
 
     //Função que implementa o movimento do personagem principal
@@ -49,8 +53,15 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(-1,1,1);
         }
+
+        //Seta a velocidade do player diretamente no RigidBody, realizando calculos de colisão e movimento
+        rigidbody.velocity = (moveDelta * speedMove);
     }
 
+
+    //Codigo abaixo se tornou obsoleto, pois o rigidbody implemente essas funções
+
+    /*
     //Função que implementa o sistema de colisão. Impedirá o personagem de se mover quando este entrar em contato com uma caixa de colisão que se encontra em ao menos uma das layers especificadas.
     public void Colisao()
     {
@@ -75,6 +86,27 @@ public class Player : MonoBehaviour
             transform.Translate(moveDelta.x * Time.deltaTime * speedMove, 0, 0);
         }
         
+    }*/
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Keyboard_Collider")
+        {
+            scr_PlayerCollider.AddCollider(collision.transform.parent.gameObject);
+            print("O jogador entrou no collider: " + collision.name + "::" + collision.transform.parent.name);
+            print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "Keyboard_Collider")
+        {
+            scr_PlayerCollider.RemoveColllider(collision.transform.parent.gameObject);
+            print("O jogador saiu do collider: " + collision.name + "::" + collision.transform.parent.name);
+            print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
+        }
     }
 
 }
