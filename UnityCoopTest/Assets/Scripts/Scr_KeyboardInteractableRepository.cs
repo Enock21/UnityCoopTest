@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class scr_PlayerCollider
+public class Scr_KeyboardInteractableRepository:MonoBehaviour
 {
 
     //Lista de gameobjects que o player entrou no collider trigger. 
-    private static List<scr_KeyboardInteractable> colliders = new List<scr_KeyboardInteractable>();
+    private static List<Scr_KeyboardInteractable> colliders = new();
 
 
     //Se o objeto não existe dentro da lista de colliders, então ele é adicionado
-    public static void AddCollider(scr_KeyboardInteractable obj)
+    public static void AddCollider(Scr_KeyboardInteractable obj)
     {
 
-        if (!Contains(obj.GetInstanceID()))
+        if (!Contains(obj.ClassName))
             colliders.Add(obj);
 
     }
 
     //InstanceID é como um hashcode. Cada instance tem um ID unico
-    public static void RemoveColllider(scr_KeyboardInteractable obj)
+    public static void RemoveColllider(Scr_KeyboardInteractable obj)
     {
         bool found = false;
         int i = 0;
@@ -42,19 +42,39 @@ public static class scr_PlayerCollider
     }
 
     //Verifica se existe algum elemento com a instanceId passada como parametro. Se sim, retorna true, caso contrário, retorna falso
-    private static bool Contains(int InstanceID)
+    public static bool Contains(string className)
     {
         bool retorno = false;
         int i = 0;
         while(!retorno && i < colliders.Count)
         {
-            if(colliders[i].GetInstanceID() == InstanceID)
+            if(colliders[i].ClassName.ToUpper() == className.ToUpper())
             {
                 retorno = true;
             }
             i++;
         }
         return retorno;
+    }
+
+    public static Scr_KeyboardInteractable Get(string className)
+    {
+        Scr_KeyboardInteractable retorno = null;
+        if (!Contains(className))
+            return retorno;
+
+        int i = 0;
+        while (!retorno && i < colliders.Count)
+        {
+            if (colliders[i].ClassName.ToUpper() == className.ToUpper())
+            {
+                retorno = colliders[i];
+            }
+            i++;
+        }
+        return retorno;
+
+
     }
 
 

@@ -28,7 +28,12 @@ public class Player : MonoBehaviour
     //FixedUpdate() funciona bem com o uso de physics
     public void FixedUpdate()
     {
-        Mover();
+        if(Scr_PlayerSettings.CanPlayerMove)
+            Mover();
+        else
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
         //Colisao();
     }
 
@@ -94,11 +99,21 @@ public class Player : MonoBehaviour
         //Confirma a tag do objeto do collider. 
         if(collision.tag == "Keyboard_Collider")
         {
+            Scr_KeyboardInteractable keyInt = collision.transform.parent.GetComponent<Scr_KeyboardInteractable>();
             //Adiciona o scrKeyboardInteractable do parent do objeto do collider para a lista de colliders em que o player invadiu.
-            //Após isso, é printado o nome do parent, e a quantidade de triggers que o player entrou
-            scr_PlayerCollider.AddCollider(collision.transform.parent.GetComponent<scr_KeyboardInteractable>());
+            //Após isso, é printado o nome do collider assim como o nome do parent
+            Scr_KeyboardInteractableRepository.AddCollider(keyInt);
             print("O jogador entrou no collider: " + collision.name + "::" + collision.transform.parent.name);
-            print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
+
+            //Pega todos os métodos do objeto invadido, e printa os nomes
+            List<string> methods = keyInt.GetFunctions();
+            print("Total de metodos do objeto: " + methods.Count);
+            string methodsString = "Metodos: \n";
+            foreach (string i in methods)
+            {
+                methodsString += (" " + i);
+            }
+            print(methodsString);
         }
     }
 
@@ -110,9 +125,8 @@ public class Player : MonoBehaviour
         {
             //Remove o scrKeyboardInteractable do parent do objeto do collider da lista de colliders em que o player entrou.
             //Após isso, é printado o nome do parent, e a quantidade de triggers que o player entrou
-            scr_PlayerCollider.RemoveColllider(collision.transform.parent.GetComponent<scr_KeyboardInteractable>());
+            Scr_KeyboardInteractableRepository.RemoveColllider(collision.transform.parent.GetComponent<Scr_KeyboardInteractable>());
             print("O jogador saiu do collider: " + collision.name + "::" + collision.transform.parent.name);
-            print("Total de colliders adentrados: " + scr_PlayerCollider.Count());
         }
     }
 
