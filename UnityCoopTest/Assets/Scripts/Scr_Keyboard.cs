@@ -19,17 +19,25 @@ public class Scr_Keyboard : MonoBehaviour
     void Update()
     {
 
-        isFocused = keyboard.isFocused;
+
+        isFocused = keyboard.isFocused; //Conjfirma se o teclado está focado ou não. 
+        //Isso é importante principalmente para ativar ou desativar o teclado quando o jogador aperta o botão enter
+
+        //Se o player apertar o botão enter, é chamada a classe input function, e a classe que muda o foco do teclado
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
         {
             InputFunction();
             ToggleActivationKeyBoard();
         }
+        //Chama a classe responsável por definir se o player pode se mover ou não
         SetPlayerMove();
 
     }
 
 
+    //Faz uma verificação simples para confirmar se há pelo menos um . e os parenteses no texto digitado no teclado.
+    //Caso positivo, envia o texto para a classe InputController.
+    //Caso negativo, mostra uma mensagem de erro no console
     void InputFunction()
     { 
         string text = keyboard.text;
@@ -44,6 +52,7 @@ public class Scr_Keyboard : MonoBehaviour
     }
 
     //Se o teclado estiver no foco para digitação, o player não pode se mover
+    //Essa classe desabilida ou habilita a funcionalidade do jogador andar dependendo se o teclado está em foco ou não
     void SetPlayerMove()
     {
         bool canPlayerMove = true;
@@ -54,6 +63,7 @@ public class Scr_Keyboard : MonoBehaviour
         Scr_PlayerSettings.CanPlayerMove = canPlayerMove;
     }
 
+    //Troca o status do foco do teclado. Se estiver sem foco, passa a ter, e se tiver passa a não ter
     void ToggleActivationKeyBoard()
     {
         if (!isSelected && !isFocused)
@@ -77,27 +87,8 @@ public class Scr_Keyboard : MonoBehaviour
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
-    public void IsSelected()
-    {
-        isSelected = true;
-    }
-
-    public void IsDeselected()
-    {
-        isSelected = false;
-    }
-
-    public void OnClickEnterButton()
-    {
-        InputFunction();
-    }
-
-    public void OnClickCancelButton()
-    {
-        keyboard.text = "";
-        DesactiveKeyboard();
-    }
-
+    //Faz uma checagem simples. Se o player digitou um ponto e os parenteses, então o texto digitado é valido.
+    //Vale a pena notar que não foi conferido se há mais de um parenteses ou a ordem dos mesmos. Isso é algo que pode ser aprimorado
     private bool CheckText(string text)
     {
         string[] textSplited = text.Split('.');
@@ -109,4 +100,32 @@ public class Scr_Keyboard : MonoBehaviour
         else
             return false;
     }
+
+    public void SetSelected()
+    {
+        isSelected = true;
+    }
+
+    public void SetDeselected()
+    {
+        isSelected = false;
+    }
+
+    //Função que é executada quando o jogador aperta o botão virtual enter do teclado.
+    //Deve ser a mesma coisa quando o jogador aperta o botão enter de seu teclado físico
+    public void OnClickEnterButton()
+    {
+        InputFunction();
+        ToggleActivationKeyBoard();
+    }
+
+    //Função que é executada quando o jogador aperta o botão virtual ESC do teclado.
+    //Deve ser a mesma coisa quando o jogador aperta o botão ESC de seu teclado físico
+    public void OnClickCancelButton()
+    {
+        keyboard.text = "";
+        DesactiveKeyboard();
+    }
+
+    
 }
