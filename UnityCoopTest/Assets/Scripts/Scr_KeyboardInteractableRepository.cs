@@ -18,15 +18,15 @@ public class Scr_KeyboardInteractableRepository:MonoBehaviour
 
     }
 
-    //InstanceID é como um hashcode. Cada instance tem um ID unico
+    //Remove o collider que possui o mesmo className do Scr_KeyboardInteractable passado como parametro
     public static void RemoveColllider(Scr_KeyboardInteractable obj)
     {
         bool found = false;
         int i = 0;
-        int instanceID = obj.GetInstanceID();
+        string className = obj.ClassName;
         while(!found && i < colliders.Count)
         {
-            if(colliders[i].GetInstanceID() == instanceID)
+            if(colliders[i].ClassName == className)
             {
                 colliders.Remove(obj);
                 found = true;
@@ -57,6 +57,7 @@ public class Scr_KeyboardInteractableRepository:MonoBehaviour
         return retorno;
     }
 
+    //Retorna o keyboarde que possui o mesmo className do que o passado como parametro
     public static Scr_KeyboardInteractable Get(string className)
     {
         Scr_KeyboardInteractable retorno = null;
