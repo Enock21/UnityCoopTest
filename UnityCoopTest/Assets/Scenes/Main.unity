@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 155043739}
   - component: {fileID: 155043738}
   - component: {fileID: 155043740}
+  - component: {fileID: 155043741}
   m_Layer: 9
   m_Name: NPC_0
   m_TagString: Untagged
@@ -234,6 +235,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1641295, y: 0.879126}
   m_EdgeRadius: 0
+--- !u!114 &155043741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155043737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214f4066b78529c44bdc1560f44820e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!1001 &244416715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54772,8 +54799,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1511909411}
   - component: {fileID: 1511909410}
-  - component: {fileID: 1511909412}
   - component: {fileID: 1511909413}
+  - component: {fileID: 1511909412}
   m_Layer: 9
   m_Name: Player_0
   m_TagString: Untagged
@@ -54819,8 +54846,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1849961785
-  m_SortingLayer: 4
+  m_SortingLayerID: 543066383
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -758693072, guid: 7811f0b90be30ac41809eb8a8952854e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
