@@ -39,12 +39,12 @@ public class Scr_InputController : MonoBehaviour
     {
         if (obj == null)
         {
-            print("Objeto não encontrado");
+            Scr_ErrorMessage.ErrorMessage.ShowNewErrorMessage(Scr_Error.OBJETO_NAO_ENCONTRADO);
             return false;
         }
         if (function[0] == null)
         {
-            print("Function nao encontrada");
+            Scr_ErrorMessage.ErrorMessage.ShowNewErrorMessage(Scr_Error.FUNCAO_NAO_ENCONTRADA);
             return false;
         }        
         return true;
