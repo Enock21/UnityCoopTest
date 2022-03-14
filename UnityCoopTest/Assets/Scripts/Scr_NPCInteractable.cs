@@ -68,20 +68,35 @@ public class Scr_NPCInteractable : Scr_KeyboardInteractable
     {
         print("Função digitada: " + function);
         print("With parameters: " + parameter);
-        switch (function)
+        int parsedValue; //variavel a ser convertida
+        bool parsed;     //Variavel a armazenar se a conversão foi bem-sucedida
+        switch (function) 
         {
             case KEYBOARD + MOVE_X:
-                int value = int.Parse(parameter); //Converte de string para int
-                Keyboard_MoveX(value);
+                //Tenta converter de string para inteiro. Caso consiga,
+                //retorna true, e parsedValue adota o valor convertido,
+                //Caso contrário, exibe uma mensagem de erro de conversão
+                parsed = int.TryParse(parameter, out parsedValue); 
+                if (parsed)
+                    Keyboard_MoveX(parsedValue);
+                else
+                    Scr_ErrorMessage.ErrorMessage.ShowNewErrorMessage(Scr_Error.PARAMETRO_NOT_INT);
                 break;
             case KEYBOARD + MOVE_Y:
-                int y = int.Parse(parameter); //Converte de string para int
-                Keyboard_MoveY(y);
+                //Tenta converter de string para inteiro. Caso consiga,
+                //retorna true, e parsedValue adota o valor convertido,
+                //Caso contrário, exibe uma mensagem de erro de conversão
+                parsed = int.TryParse(parameter, out parsedValue); //Converte de string para int
+                if (parsed)
+                    Keyboard_MoveX(parsedValue);
+                else
+                    Scr_ErrorMessage.ErrorMessage.ShowNewErrorMessage(Scr_Error.PARAMETRO_NOT_INT);
                 break;
             default:
                 print("Função não encontrada");
                 break;
         }
     }
+
 
 }

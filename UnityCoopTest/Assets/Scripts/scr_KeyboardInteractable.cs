@@ -42,4 +42,5 @@ public abstract class Scr_KeyboardInteractable:MonoBehaviour
         return functions;
 
     }
+
 }
